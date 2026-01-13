@@ -1,0 +1,9 @@
+// Tools module - Tool SPI, Built-ins, External adapters
+
+dependencies {
+    implementation project(':schema')
+    implementation project(':governance')
+    implementation project(':observability')
+    
+    // TODO: Add tool adapter dependencies (HTTP client, gRPC client, MCP client)
+}

@@ -1,0 +1,10 @@
+// Schema module - Models, versioning, validation
+// Foundation module with no dependencies on other SpiralServer modules
+
+dependencies {
+    // Schema validation
+    api 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    api 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+    
+    // TODO: Add schema validation library (e.g., JSON Schema, Avro, Protobuf)
+}

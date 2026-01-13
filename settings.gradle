@@ -1,0 +1,13 @@
+rootProject.name = 'spiral-server'
+
+// Core modules
+include 'schema'
+include 'state-plane'
+include 'runtime'
+include 'control-plane'
+include 'governance'
+include 'observability'
+include 'api'
+include 'tools'
+include 'deploy'
+include 'examples'

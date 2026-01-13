@@ -1,0 +1,19 @@
+// API module - gRPC + HTTP contracts
+
+dependencies {
+    implementation project(':schema')
+    implementation project(':control-plane')
+    implementation project(':runtime')
+    implementation project(':governance')
+    
+    // gRPC
+    api 'io.grpc:grpc-netty-shaded:1.59.0'
+    api 'io.grpc:grpc-protobuf:1.59.0'
+    api 'io.grpc:grpc-stub:1.59.0'
+    
+    // HTTP (JAX-RS or Spring Web - TBD)
+    // TODO: Choose HTTP framework
+    
+    // TODO: Add protobuf plugin and configure
+    // apply plugin: 'com.google.protobuf'
+}

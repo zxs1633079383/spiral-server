@@ -1,0 +1,10 @@
+// Observability module - Trace / metrics / audit models
+
+dependencies {
+    implementation project(':schema')
+    
+    // OpenTelemetry API (no SDK yet - abstraction only)
+    api 'io.opentelemetry:opentelemetry-api:1.32.0'
+    
+    // TODO: Add OpenTelemetry SDK when needed
+}

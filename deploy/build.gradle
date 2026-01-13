@@ -1,0 +1,9 @@
+// Deploy module - Deployment configurations and utilities
+
+dependencies {
+    implementation project(':api')
+    implementation project(':control-plane')
+    implementation project(':runtime')
+    
+    // TODO: Add deployment framework dependencies (Kubernetes, Docker, etc.)
+}

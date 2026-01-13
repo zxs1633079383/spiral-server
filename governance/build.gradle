@@ -1,0 +1,8 @@
+// Governance module - Policies, Enforcement hooks, Lineage
+
+dependencies {
+    implementation project(':schema')
+    implementation project(':observability')
+    
+    // TODO: Add policy engine dependencies
+}

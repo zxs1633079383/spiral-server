@@ -1,0 +1,9 @@
+// Examples module - Example agents and usage patterns
+
+dependencies {
+    implementation project(':api')
+    implementation project(':control-plane')
+    implementation project(':tools')
+    
+    // Examples should depend on all modules for demonstration
+}

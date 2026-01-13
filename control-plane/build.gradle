@@ -1,0 +1,11 @@
+// Control Plane module - Agent registry, Event router (CEL), Scheduler, Admission control
+
+dependencies {
+    implementation project(':schema')
+    implementation project(':state-plane')
+    implementation project(':runtime')
+    implementation project(':governance')
+    
+    // TODO: Add CEL (Common Expression Language) evaluation library
+    // TODO: Add scheduler dependencies
+}

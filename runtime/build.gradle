@@ -1,0 +1,9 @@
+// Runtime module - Deterministic executor, Pure planner, Saga engine, Tool boundary, Replay engine
+// Core execution engine
+
+dependencies {
+    implementation project(':schema')
+    implementation project(':state-plane')
+    
+    // TODO: Add state machine dependencies if needed
+}
