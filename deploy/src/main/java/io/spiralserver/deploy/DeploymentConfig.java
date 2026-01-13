@@ -42,6 +42,13 @@ public interface DeploymentConfig {
      * @return resource configuration
      */
     ResourceConfig getResourceConfig();
+
+    /**
+     * Returns rollout strategy configuration.
+     * 
+     * @return rollout strategy
+     */
+    RolloutStrategy getRolloutStrategy();
     
     /**
      * Resource configuration.

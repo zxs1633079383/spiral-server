@@ -55,6 +55,7 @@ public interface Trace {
         SpanStatus status();
         Map<String, String> attributes();
         List<SpanEvent> events();
+        Sampling sampling(); // sampling configuration for this span
         
         /**
          * Adds an event to the span.
@@ -77,5 +78,13 @@ public interface Trace {
         String name();
         Instant timestamp();
         Map<String, String> attributes();
+    }
+
+    /**
+     * Sampling configuration for traces/spans.
+     */
+    interface Sampling {
+        double rate(); // 0.0 - 1.0
+        Map<String, String> rules(); // optional rule-based sampling
     }
 }

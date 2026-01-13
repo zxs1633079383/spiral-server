@@ -49,8 +49,27 @@ public final class Version implements Comparable<Version> {
      * @throws IllegalArgumentException if format is invalid
      */
     public static Version parse(String versionString) {
-        // TODO: Implement parsing
-        throw new UnsupportedOperationException("Version parsing not yet implemented");
+        if (versionString == null || versionString.isBlank()) {
+            throw new IllegalArgumentException("Version string cannot be null or blank");
+        }
+        
+        String[] parts = versionString.trim().split("\\.");
+        if (parts.length != 3) {
+            throw new IllegalArgumentException(
+                "Version string must be in format 'major.minor.patch', got: " + versionString
+            );
+        }
+        
+        try {
+            int major = Integer.parseInt(parts[0]);
+            int minor = Integer.parseInt(parts[1]);
+            int patch = Integer.parseInt(parts[2]);
+            return new Version(major, minor, patch);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(
+                "Version components must be integers, got: " + versionString, e
+            );
+        }
     }
     
     public int major() {

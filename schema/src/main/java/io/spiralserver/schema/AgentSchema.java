@@ -36,12 +36,13 @@ public interface AgentSchema extends Schema {
     String name();
     
     /**
-     * Returns event subscriptions with CEL filter expressions.
+     * Returns event subscriptions with filtering expressions.
      * 
      * <p>Each subscription defines:
      * <ul>
      *   <li>Event schema reference</li>
-     *   <li>CEL filter expression (optional)</li>
+     *   <li>Filter expression (CEL/JSONPath/JQ/custom)</li>
+     *   <li>Filter language type</li>
      *   <li>Correlation key expression</li>
      *   <li>Idempotency key expression</li>
      * </ul>
@@ -77,8 +78,19 @@ public interface AgentSchema extends Schema {
      */
     interface EventSubscription {
         SchemaRef eventRef();
-        String celFilter(); // CEL expression, empty string means no filter
-        String correlationKeyExpr(); // CEL expression for correlation key
-        String idempotencyKeyExpr(); // CEL expression for idempotency key
+        String filter(); // filter expression (language defined by filterLanguage)
+        FilterLanguage filterLanguage(); // CEL, JSONPath, JQ, EXPR
+        String correlationKeyExpr(); // expression for correlation key
+        String idempotencyKeyExpr(); // expression for idempotency key
+    }
+
+    /**
+     * Supported filter languages for event routing.
+     */
+    enum FilterLanguage {
+        CEL,
+        JSONPATH,
+        JQ,
+        EXPR // generic expression language
     }
 }

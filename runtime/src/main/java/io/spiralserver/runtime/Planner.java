@@ -83,6 +83,39 @@ public interface Planner {
      * Planning context (tool availability, policies, etc.).
      */
     interface PlanningContext {
-        // TODO: Define context structure (available tools, policies, budget, etc.)
+        /**
+         * Returns available tool schema references.
+         * 
+         * @return list of available tool refs
+         */
+        java.util.List<io.spiralserver.schema.SchemaRef> availableTools();
+        
+        /**
+         * Returns applicable policy schema references.
+         * 
+         * @return list of policy refs
+         */
+        java.util.List<io.spiralserver.schema.SchemaRef> applicablePolicies();
+        
+        /**
+         * Returns budget constraints.
+         * 
+         * @return budget in tokens/cost units (0 means no limit)
+         */
+        long budgetLimit();
+        
+        /**
+         * Returns remaining budget.
+         * 
+         * @return remaining budget
+         */
+        long remainingBudget();
+        
+        /**
+         * Returns tenant identifier for multi-tenant isolation.
+         * 
+         * @return tenant ID
+         */
+        String tenantId();
     }
 }

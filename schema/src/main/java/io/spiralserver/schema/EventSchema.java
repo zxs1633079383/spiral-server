@@ -40,8 +40,7 @@ public interface EventSchema extends Schema {
      * 
      * @return data schema definition
      */
-    // TODO: Define DataSchema type
-    // DataSchema dataSchema();
+    DataSchema dataSchema();
     
     /**
      * Returns data classification metadata.
@@ -69,6 +68,16 @@ public interface EventSchema extends Schema {
      * @return idempotency field paths
      */
     List<String> idempotencyFields();
+
+    /**
+     * Returns default deduplication window in milliseconds.
+     * 
+     * <p>Used when idempotency key is present to prevent duplicate processing
+     * within the specified time window.
+     * 
+     * @return deduplication window in ms (0 means no window)
+     */
+    long dedupeWindowMs();
     
     /**
      * Data classification levels.

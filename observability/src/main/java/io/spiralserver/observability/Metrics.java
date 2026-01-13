@@ -49,4 +49,13 @@ public interface Metrics {
      * @param attributes metric attributes
      */
     void recordHistogram(String name, double value, Map<String, String> attributes);
+
+    /**
+     * Metrics field mapping configuration.
+     * 
+     * @return mapping config (nullable means default)
+     */
+    default Map<String, String> fieldMappings() {
+        return Map.of();
+    }
 }

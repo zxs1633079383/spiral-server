@@ -65,6 +65,26 @@ public interface Tool {
     interface ToolContext {
         String agentInstanceId();
         String correlationKey();
-        // TODO: Add more context (budget, policies, etc.)
+        
+        /**
+         * Returns budget allocated for this tool invocation.
+         * 
+         * @return budget in tokens/cost units (0 means no limit)
+         */
+        long budget();
+        
+        /**
+         * Returns applicable policy schema references.
+         * 
+         * @return list of policy refs
+         */
+        java.util.List<io.spiralserver.schema.SchemaRef> policies();
+        
+        /**
+         * Returns tenant identifier.
+         * 
+         * @return tenant ID
+         */
+        String tenantId();
     }
 }

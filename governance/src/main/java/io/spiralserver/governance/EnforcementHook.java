@@ -45,6 +45,26 @@ public interface EnforcementHook {
         String agentInstanceId();
         String action();
         Object data();
-        // TODO: Add more context
+        
+        /**
+         * Returns tenant identifier.
+         * 
+         * @return tenant ID
+         */
+        String tenantId();
+        
+        /**
+         * Returns user identifier.
+         * 
+         * @return user ID (nullable)
+         */
+        String userId();
+        
+        /**
+         * Returns applicable policy schema references.
+         * 
+         * @return list of policy refs
+         */
+        java.util.List<io.spiralserver.schema.SchemaRef> policies();
     }
 }

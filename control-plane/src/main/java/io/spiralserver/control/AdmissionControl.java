@@ -51,13 +51,33 @@ public interface AdmissionControl {
         boolean allowed();
         String reason(); // reason if not allowed
         List<String> violations(); // policy violations
-    }
+    }   
     
     /**
      * Admission context.
      */
     interface AdmissionContext {
         String tenantId(); // multi-tenant support
-        // TODO: Add more context (user, resource limits, etc.)
+        
+        /**
+         * Returns user identifier requesting admission.
+         * 
+         * @return user ID (nullable)
+         */
+        String userId();
+        
+        /**
+         * Returns resource limits (CPU, memory, etc.).
+         * 
+         * @return resource limits map
+         */
+        java.util.Map<String, String> resourceLimits();
+        
+        /**
+         * Returns current resource usage.
+         * 
+         * @return resource usage map
+         */
+        java.util.Map<String, String> resourceUsage();
     }
 }

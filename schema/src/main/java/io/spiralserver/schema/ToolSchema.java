@@ -40,16 +40,14 @@ public interface ToolSchema extends Schema {
      * 
      * @return input data schema
      */
-    // TODO: Define DataSchema type
-    // DataSchema inputSchema();
+    DataSchema inputSchema();
     
     /**
      * Returns the output schema (tool result).
      * 
      * @return output data schema
      */
-    // TODO: Define DataSchema type
-    // DataSchema outputSchema();
+    DataSchema outputSchema();
     
     /**
      * Returns protocol bindings.
@@ -72,8 +70,7 @@ public interface ToolSchema extends Schema {
      * 
      * @return retry configuration (nullable if no retries)
      */
-    // TODO: Define RetryConfig type
-    // RetryConfig retryConfig();
+    RetryConfig retryConfig();
     
     /**
      * Returns resource requirements (budget, rate limits).
@@ -81,6 +78,22 @@ public interface ToolSchema extends Schema {
      * @return resource requirements map
      */
     Map<String, ResourceRequirement> resourceRequirements();
+
+    /**
+     * Returns authorization requirements for this tool.
+     * 
+     * @return authorization configuration (nullable means default)
+     */
+    Authorization authorization();
+
+    /**
+     * Returns whether this tool is read-only (no side effects).
+     * 
+     * <p>Important for DIRECT_DB bindings to enforce read-only access.
+     * 
+     * @return true if read-only
+     */
+    boolean readOnly();
     
     /**
      * Protocol binding definition.
@@ -88,6 +101,7 @@ public interface ToolSchema extends Schema {
     interface ProtocolBinding {
         ProtocolType protocol();
         Map<String, String> configuration(); // protocol-specific config
+        RlsPolicy rlsPolicy(); // Row-level security configuration (nullable)
         
         enum ProtocolType {
             HTTP,
@@ -105,5 +119,21 @@ public interface ToolSchema extends Schema {
         String name();
         String value(); // human-readable value
         // TODO: Define structured requirement types
+    }
+
+    /**
+     * Authorization configuration for tools.
+     */
+    interface Authorization {
+        List<String> allowedRoles(); // empty means all
+        List<String> deniedRoles(); // optional deny list
+    }
+
+    /**
+     * Row-level security policy.
+     */
+    interface RlsPolicy {
+        String policyName();
+        String condition(); // expression applied per row
     }
 }

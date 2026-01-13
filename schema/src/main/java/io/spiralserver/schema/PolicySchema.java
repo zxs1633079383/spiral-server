@@ -82,6 +82,7 @@ public interface PolicySchema extends Schema {
         TOOL_GUARDRAIL,
         BUDGET,
         RATE_LIMIT,
+        RLS, // Row Level Security
         CUSTOM
     }
     

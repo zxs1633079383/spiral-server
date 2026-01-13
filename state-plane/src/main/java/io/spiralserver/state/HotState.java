@@ -96,6 +96,19 @@ public interface HotState {
         String checkpointId();
         long stateVersion();
         Instant timestamp();
-        // TODO: Add checkpoint metadata (snapshot data, etc.)
+        
+        /**
+         * Returns checkpoint metadata.
+         * 
+         * @return metadata map
+         */
+        java.util.Map<String, String> metadata();
+        
+        /**
+         * Returns snapshot reference if checkpoint has associated snapshot.
+         * 
+         * @return snapshot reference (nullable)
+         */
+        String snapshotRef();
     }
 }

@@ -64,13 +64,69 @@ public final class SchemaRef {
     /**
      * Parses a schema reference from URI string.
      * 
+     * <p>Supports formats:
+     * <ul>
+     *   <li>ref://schemas/{type}/{name}/{version}</li>
+     *   <li>ref://schemas/{type}/{name}/{version}?digest={algorithm}:{value}</li>
+     * </ul>
+     * 
      * @param refString reference string (e.g., "ref://schemas/agent/my-agent/1.0.0")
      * @return SchemaRef instance
      * @throws IllegalArgumentException if format is invalid
      */
     public static SchemaRef parse(String refString) {
-        // TODO: Implement parsing
-        throw new UnsupportedOperationException("SchemaRef parsing not yet implemented");
+        if (refString == null || refString.isBlank()) {
+            throw new IllegalArgumentException("Schema reference string cannot be null or blank");
+        }
+        
+        String trimmed = refString.trim();
+        if (!trimmed.startsWith("ref://schemas/")) {
+            throw new IllegalArgumentException(
+                "Schema reference must start with 'ref://schemas/', got: " + refString
+            );
+        }
+        
+        String rest = trimmed.substring("ref://schemas/".length());
+        
+        // Split query parameters
+        String[] parts = rest.split("\\?", 2);
+        String path = parts[0];
+        String query = parts.length > 1 ? parts[1] : null;
+        
+        // Parse path: type/name/version
+        String[] pathParts = path.split("/");
+        if (pathParts.length != 3) {
+            throw new IllegalArgumentException(
+                "Schema reference path must be 'type/name/version', got: " + path
+            );
+        }
+        
+        String type = pathParts[0];
+        String name = pathParts[1];
+        Version version = Version.parse(pathParts[2]);
+        
+        // Parse digest from query string
+        Digest digest = null;
+        if (query != null && !query.isBlank()) {
+            if (query.startsWith("digest=")) {
+                String digestValue = query.substring("digest=".length());
+                digest = parseDigest(digestValue);
+            }
+        }
+        
+        return new SchemaRef(type, name, version, digest);
+    }
+    
+    private static Digest parseDigest(String digestString) {
+        int colonIndex = digestString.indexOf(':');
+        if (colonIndex < 0) {
+            throw new IllegalArgumentException(
+                "Digest must be in format 'algorithm:value', got: " + digestString
+            );
+        }
+        String algorithm = digestString.substring(0, colonIndex);
+        String value = digestString.substring(colonIndex + 1);
+        return new Digest(algorithm, value);
     }
     
     public String type() {

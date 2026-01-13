@@ -1,5 +1,7 @@
 package io.spiralserver.runtime;
 
+import io.spiralserver.schema.RetryConfig;
+
 import java.util.List;
 
 /**
@@ -55,6 +57,7 @@ public interface SagaEngine {
             String stepId();
             Planner.Plan.Action action(); // action to execute
             Planner.Plan.Action compensation(); // compensation action (nullable)
+            RetryConfig retryConfig(); // retry/backoff configuration (nullable)
         }
     }
     

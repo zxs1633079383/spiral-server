@@ -82,5 +82,15 @@ public interface AuditLog {
         String resource(); // nullable
         Instant fromTime(); // nullable
         Instant toTime(); // nullable
+        Map<String, String> filters(); // custom filters (field -> value/pattern)
+    }
+
+    /**
+     * Audit policy configuration.
+     */
+    interface AuditPolicy {
+        boolean enabled();
+        double samplingRate(); // 0.0 - 1.0
+        Map<String, String> rules(); // rule-based audit controls
     }
 }
